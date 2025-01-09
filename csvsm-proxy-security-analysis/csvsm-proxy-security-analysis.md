@@ -4,8 +4,9 @@ Permalink to latest version: https://stringlytyped.github.io/publications/csvsm-
 
 **Author:** Jean Snyman, Hewlett Packard Labs (Security)
 
+<br>
 
-#### Change History
+**Change History**
 
 - 2025-01-09: (Current) Initial version
 
