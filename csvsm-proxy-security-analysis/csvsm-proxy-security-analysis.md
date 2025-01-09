@@ -54,9 +54,9 @@ While flaws have previously been pointed out by members of the Keylime attestati
 We will demonstrate that the host-based proxy is likely **not secure**[^secure-def] for the following uses:
 
 - Persistence of UEFI variables
-- TPM-based attestation
+- Persistence of TPM state when the TPM is used for attestation
 - Confidential storage of secrets in the TPM for applications other than full-disk encryption (FDE)
-- Protection of confidential data in environments with multiple key brokers
+- Protection of data in environments with multiple key brokers
 
 The host-based proxy **may be secure**[^secure-def] for the following uses:
 
@@ -69,7 +69,7 @@ This is contingent on a number of factors which we will enumerate.
 
 ### System Architecture
 
-The host-based proxy is implemented with two parts: a frontend which connects the SVSM to the hypervisor and a backend which the hypervisor uses to contact an external key broker. This allows multiple backends to support various different attestation protocols and key brokers. The backend currently implemented is for the Trustee Key Broker Service (KBS).
+The host-based proxy is implemented with two parts: a frontend which connects the SVSM to the hypervisor and a backend which the hypervisor uses to contact an external key broker. This architecture allows multiple different attestation protocols and key brokers to be supported through the implementation of additional backends. The backend currently implemented is for the Trustee Key Broker Service (KBS).
 
 A future patch to Coconut-SVSM is intended to read/write state data (encrypted with a key obtained from the KBS) to a storage location provided by the hypervisor. Although the full details of this mechanism are not yet known, for the purposes of our security analysis we assume the state data will be encrypted using an authenticated encryption scheme.
 
