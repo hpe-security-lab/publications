@@ -93,6 +93,7 @@ It is understood that the security of a construction does not necessarily hold u
   <img src="./proxy-protocol.svg" alt="Trustee KBS protocol proxied through hypervisor">
   <br>
   <em><strong>Figure 1:</strong> Trustee KBS protocol proxied through hypervisor</em>
+  <br>
 </p>
 
 Interactions between the SVSM and the processor and between the SVSM and components running at higher VMPLs are not shown but still assumed to take place.
@@ -119,7 +120,7 @@ We given two examples of possible attacks in the subsections below:
 
 #### Scenario A: Variable Rollback
 
-Consider a CVM with UEFI Secure Boot enabled. The firmware's list of trusted keys contains an OS vendor key used to sign the bootloader. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#system-architecture)) and stored in hypervisor-provided storage.
+Consider a CVM with UEFI Secure Boot enabled. The firmware's list of trusted keys contains an OS vendor key used to sign the bootloader. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#primitives)) and stored in hypervisor-provided storage.
 
 Now imagine the following events occur in order:
 
