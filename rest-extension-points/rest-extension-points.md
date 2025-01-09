@@ -1,6 +1,6 @@
 # REST Extension Points for Keylime
 
-Permalink to latest version: https://stringlytyped.github.io/keylime-materials/rest-extension-points/
+Permalink to latest version: https://stringlytyped.github.io/publications/rest-extension-points/
 
 ## Background
 
