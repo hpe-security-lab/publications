@@ -195,7 +195,7 @@ Imagine the following events occur in order:
 
 Depending on the deployment, the hypervisor could use this to access confidential data, modify data for which it is not authorised, or otherwise manipulate cross-CVM protocols and communications.
 
-Once again, one might expect an attack of this nature to be detectable through attestation of the post-boot environment, but this is not the case as the hypervisor can [circumvent TPM attestation](#tpm-attestation). Sealing the secret (in the above example, the DevID private key) against TPM PCRs also cannot be used to prevent this attack, as measures of runtime state (such as IMA[^ima-docs]) do not result in predictable PCRs.
+Once again, one might expect an attack of this nature to be detectable through attestation of the post-boot environment, but this is not the case as the hypervisor can [circumvent TPM attestation](#tpm-attestation). Sealing the secret (in the above example, the DevID private key) against TPM PCRs also cannot be used to prevent this attack, as measures of runtime state (such as IMA[^ima-docs]) do not result in predictable PCR values.
 
 
 ### Multiple Key Brokers
@@ -216,11 +216,11 @@ When using the host-based proxy for this purpose, **we give the following recomm
   - PCR 0 – Core UEFI executable code
   - PCR 2 – Pluggable executable code
   - PCR 4 – UEFI application (bootloader) code
-  - PCR 11 – Unified kernel image (UKI) measurements (when using UKIs)
+  - PCR 11 – Unified kernel image (UKI) measurements (when using UKIs) and BitLocker measurements (when running Windows)
 
-  PCR 11 is only required when a CVM is running Windows. PCR 7 (Secure Boot state) and PCR 14 (MOK certificates and hashes) may be used in place of PCRs 0, 2 and 4, but this is less preferable as it makes the boot process vulnerable to UEFI bootkits [^blacklotus].
+  PCR 7 (Secure Boot state) and PCR 14 (MOK certificates and hashes) may be used in place of PCRs 0, 2 and 4, but this is less preferable as it makes the boot process vulnerable to UEFI bootkits [^blacklotus].
 
-- Guard against modifications to initrd code by using a unified kernel image (UKI) or additionally sealing against PCR 9. This requires resealing of the FDE key whenever the initrd code changes.
+- Guard against modifications to initrd code by using a unified kernel image (UKI) or additionally sealing against PCR 9. The latter option requires resealing of the FDE key whenever the initrd code changes.
 
 However, it is important to understand and keep in mind the limitations given in the following subsections. 
 
@@ -231,8 +231,8 @@ However, it is important to understand and keep in mind the limitations given in
 > ### Inappropriate Uses for TPM-Sealed FDE
 >
 > #### Disk Authentication
-> 
-> Do not treat FDE as an assurance as to the integrity of a disk. You should assume that the hypervisor can modify the disk contents, even in its encrypted state, injecting data and modifying application binaries at will.
+>
+> As FDE systems do not typically perform authenticated encryption, they do not provide assurance as to the integrity of a disk. You should assume that the hypervisor can modify the disk contents, even in its encrypted state, injecting data and modifying application binaries at will.
 >
 > #### Runtime Integrity
 >
@@ -250,7 +250,7 @@ However, it is important to understand and keep in mind the limitations given in
 >
 > #### State Key Provisioning
 >
-> Our conclusion that the host-based proxy may be secure for FDE when keys are appropriately sealed is contingent on the assumption that $\mathrm{e \textunderscore state}$ and $\mathrm{state \textunderscore key}$ are provisioned such that the hypervisor cannot obtain or influence the plaintext $\mathrm{state}$ prior to first encryption and that the $\mathrm{state \textunderscore key}$ is securely generated and transferred to the key broker. This must take place before the first run of the CVM on CSP infrastructure.
+> Our conclusion as to the security of the host-based proxy for FDE (when keys are appropriately sealed) is contingent on the assumption that $\mathrm{e \textunderscore state}$ and $\mathrm{state \textunderscore key}$ are provisioned such that the hypervisor cannot obtain or influence the plaintext $\mathrm{state}$ prior to first encryption and that the $\mathrm{state \textunderscore key}$ is securely generated and transferred to the key broker. This must take place before the first run of the CVM on CSP infrastructure.
 >
 > Great care must be taken to ensure that weaknesses are not present in whatever protocol is used to perform this pre-provisioning step.
 > 
