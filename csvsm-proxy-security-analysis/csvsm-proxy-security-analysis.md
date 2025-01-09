@@ -120,7 +120,7 @@ We given two examples of possible attacks in the subsections below:
 
 #### Scenario A: Variable Rollback
 
-Consider a CVM with UEFI Secure Boot enabled. The firmware's list of trusted keys contains an OS vendor key used to sign the bootloader. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#primitives)) and stored in hypervisor-provided storage.
+Consider a CVM with UEFI Secure Boot enabled. The firmware's list of trusted keys contains an OS vendor key used to sign the bootloader. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#preliminaries)) and stored in hypervisor-provided storage.
 
 Now imagine the following events occur in order:
 
