@@ -136,7 +136,7 @@ Normally this would be detectable by TPM-based remote attestation after boot. Ho
 
 #### Scenario B: Variable Injection
 
-Consider a CVM with UEFI Secure Boot enabled. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#system-architecture)) and the result ($\mathrm{e \textunderscore state}$) is stored in hypervisor-provided storage.
+Consider a CVM with UEFI Secure Boot enabled. UEFI variables are encrypted with an authenticated encryption scheme (as [described](#preliminaries)) and the result ($\mathrm{e \textunderscore state}$) is stored in hypervisor-provided storage.
 
 Imagine the following events, also shown in Figure 2 below, occur in order:
 
@@ -146,7 +146,7 @@ Imagine the following events, also shown in Figure 2 below, occur in order:
 - **Step 4:** The hypervisor starts the CVM and attaches a virtual disk containing $\mathrm{e \textunderscore state}'$.
 - **Step 5–10:** The SVSM inside the CVM proceeds with attestation and generates an ephemeral keypair ($\mathrm{svsm \textunderscore pk}$, $\mathrm{svsm \textunderscore sk}$).
 - **Step 11:** In its participation in the attestation protocol, the hypervisor receives $\mathrm{svsm \textunderscore pk}$ in plain text.
-- **Step 12–13:** When the SVSM should receive $\mathrm{e \textunderscore state \textunderscore key} ← \mathsf{Enc}_{\mathrm{svsm \textunderscore pk}}(\mathrm{state \textunderscore key})$ as provided by the KBS (the legitimate state encryption key encrypted with the SVSM's ephemeral public key), the hypervisor instead provides $\mathrm{e \textunderscore state \textunderscore key'} ← \mathsf{Enc}_{\mathrm{svsm \textunderscore pk}}(\mathrm{state \textunderscore key}')$.
+- **Step 12–13:** When the SVSM should receive $`\mathrm{e \textunderscore state \textunderscore key} \leftarrow \mathsf{Enc}_{\mathrm{svsm \textunderscore pk}}(\mathrm{state \textunderscore key})`$ as provided by the KBS (the legitimate state encryption key encrypted with the SVSM's ephemeral public key), the hypervisor instead provides $`\mathrm{e \textunderscore state \textunderscore key'} \leftarrow \mathsf{Enc}_{\mathrm{svsm \textunderscore pk}}(\mathrm{state \textunderscore key}')`$.
 - **Step 14–15:** The SVSM uses its ephemeral private key to decrypt $\mathrm{state \textunderscore key'}$ and thereby the hypervisor-injected $\mathrm{state'}$.
 
 The hypervisor could construct $\mathrm{state}'$, for example, to disable Secure Boot. Again, it is not possible to rely on TPM-based attestation to detect this, as the hypervisor can also [circumvent TPM attestation](#tpm-attestation).
