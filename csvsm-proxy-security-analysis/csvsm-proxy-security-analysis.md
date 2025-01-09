@@ -1,6 +1,6 @@
 # Security Analysis of the <br> Host-Based Attestation Proxy in Coconut SVSM
 
-Permalink to latest version: https://stringlytyped.github.io/keylime-materials/csvsm-proxy-security-analysis/
+Permalink to latest version: https://stringlytyped.github.io/publications/csvsm-proxy-security-analysis/
 
 **Author:** Jean Snyman, Hewlett Packard Labs (Security)
 
