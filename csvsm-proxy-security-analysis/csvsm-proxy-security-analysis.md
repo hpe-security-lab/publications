@@ -2,13 +2,21 @@
 
 Permalink to latest version: https://stringlytyped.github.io/publications/csvsm-proxy-security-analysis/
 
-**Author:** Jean Snyman, Hewlett Packard Labs (Security)
+<dl>
+<dt>Author:</dt>
+<dd>
 
-<br>
+Jean Snyman, Hewlett Packard Labs (Security) <br>
+_with support from [colleagues]()_
 
-**Change History**
+<dd>
+<dt>Change history:</dt>
+<dd>
 
 - 2025-01-09: (Current) Initial version
+
+</dd>
+</dl>
 
 <br>
 
@@ -50,7 +58,7 @@ Permalink to latest version: https://stringlytyped.github.io/publications/csvsm-
 
 The Coconut-SVSM community is pursuing a plan[^proxy-prop][^proxy-pr] to allow the SVSM to attest the state of the TEE to an external verifier directly, rather than simply serving attestation reports to other software co-resident within the CVM. This is to later enable persistence of state across CVM reboots, mainly for long-lived TPM keys and (in the longer term) UEFI variables. Because Coconut-SVSM does not have a network stack, the idea is to proxy messages through the hypervisor.
 
-While flaws have previously been pointed out by members of the Keylime attestation project,[^kl-prop] we (the authors) feel there remain aspects which require further discussion. The limitations of the approach should be transparently understood by the community and users of Coconut-SVSM, or it may be deployed in scenarios which compromise the security of the TEE. This document summarises, to the best of our knowledge, the security characteristics of the proxy as implemented today and shows how we arrive at our conclusions.
+While flaws have previously been pointed out by members of the Keylime attestation project,[^kl-prop] there remain aspects which may require further discussion. The limitations of the approach should be transparently understood by the community and users of Coconut-SVSM, or it may be deployed in scenarios which compromise the security of the TEE. This document summarises, to the best of our knowledge, the security characteristics of the proxy as implemented today and shows how we arrive at our conclusions.
 
 We will demonstrate that the host-based proxy is likely **not secure**[^secure-def] for the following uses:
 
@@ -267,10 +275,13 @@ However, it is important to understand and keep in mind the limitations given in
 
 ## Acknowledgements
 
-Many thanks to colleagues and collaborators at Hewlett Packard Enterprise and RedHat for informing this security analysis, most notably:
+This work was produced with assistance from colleagues at Hewlett Packard Enterprise, most notably:
 
 - **Geoffrey Ndu**, Hewlett Packard Labs (Security)
 - **Nigel Edwards**, Hewlett Packard Labs (Security)
+
+Many thanks also to our collaborators at RedHat for providing key context which informed our analysis:
+
 - **Tyler Fanelli**, RedHat
 - **Stefano Garzarella**, RedHat
 - **Oliver Steffen**, RedHat
