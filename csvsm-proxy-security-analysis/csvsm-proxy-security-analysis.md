@@ -7,7 +7,7 @@ Permalink to latest version: https://stringlytyped.github.io/publications/csvsm-
 <dd>
 
 Jean Snyman, Hewlett Packard Labs (Security) <br>
-_with support from [colleagues]()_
+_with support from [colleagues](#acknowledgements)_
 
 <dd>
 <dt>Change history:</dt>
