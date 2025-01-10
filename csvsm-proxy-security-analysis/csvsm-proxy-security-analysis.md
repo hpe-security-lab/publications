@@ -125,7 +125,7 @@ Finally, the key broker is treated as fully trusted, so we assume the attacker c
 
 Because UEFI variables control the firmware's security features, authenticity and timeliness need to be ensured when persisting these using potentially malicious hypervisor-provided storage. As the described protocol does not achieve either, the host-based proxy is not appropriate for this use.
 
-We given two examples of possible attacks in the subsections below:
+We give two examples of possible attacks in the subsections below:
 
 #### Scenario A: Variable Rollback
 
